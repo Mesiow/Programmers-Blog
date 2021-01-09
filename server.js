@@ -1,8 +1,9 @@
 const express = require("express");
 const app = express();
 
-//setup view engine
+//setup view engine and public dir
 app.set("view engine", "ejs");
+app.use(express.static(__dirname + "/public"));
 
 
 app.get("/", (req, res) => {
