@@ -15,9 +15,17 @@ app.get("/blogs", (req, res) => {
 });
 
 //Post Route
-app.get("/new", (req, res) => {
+app.get("/blogs/new", (req, res) => {
     res.render("blogs/new");
 });
+
+
+
+
+//Login route
+app.get("/login", (req, res) => {
+    res.render("auth/login");
+})
 
 const PORT = 5000;
 app.listen(PORT, () => {console.log("Server Running");});
