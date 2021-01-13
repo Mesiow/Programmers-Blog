@@ -22,10 +22,15 @@ app.get("/blogs/new", (req, res) => {
 
 
 
-//Login route
+//Auth Routes
 app.get("/login", (req, res) => {
     res.render("auth/login");
-})
+});
+
+app.get("/register", (req, res) => {
+    res.render("auth/register");
+});
+
 
 const PORT = 5000;
 app.listen(PORT, () => {console.log("Server Running");});
