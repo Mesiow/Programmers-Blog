@@ -7,4 +7,12 @@
     resize: none
 }
 
+#buttons{
+    display:flex;
+}
+
+#submit-blog-btn{
+   margin-left: auto;
+   margin-right: 0;
+}
 
