@@ -3,7 +3,8 @@ const app = express();
 
 //setup view engine and public dir
 app.set("view engine", "ejs");
-app.use(express.static(__dirname + "/public"));
+app.use(express.static(__dirname + "/public")); //path for styles
+app.use(express.static(__dirname + "/client")); //path for scripts
 
 app.get("/", (req, res) => {
     res.redirect("/blogs");
