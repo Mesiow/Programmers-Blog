@@ -15,7 +15,27 @@ body{
 /*Nav*/
 .ui.inverted.segment{
     background: #011525;
+    position: fixed;
+    z-index: 100;
+    width: 100%;
+    padding:20px;
+    padding-top: 15px;
+    padding-bottom: 10px;
 }
+
+.divider{
+    padding-bottom: 50px;
+}
+
+#blogs-header{
+    color: white;
+    text-align: center;
+    display: block;
+    padding: 10px;
+    font-size: xx-large;
+}
+
+
 
 /*Forms*/
 .ui.form .field > label{
