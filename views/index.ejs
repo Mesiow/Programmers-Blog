@@ -6,7 +6,7 @@
 </h2>
 
 <div class="ui grid container">
-  <% for(var i = 0; i < 16; i++) { %>
+  <% blogs.forEach(blog => { %>
     <div class="four wide column">
         <div class="ui link special card">
             <div class="blurring dimmable image">
@@ -20,19 +20,19 @@
               <img src="codecode.jpg">
             </div>
             <div class="content">
-              <a class="header">Top 10 C++ Projects Ideas for C++ Beginners</a>
+              <a class="header"><%=blog.title%></a>
               <div class="meta">
-                <span style="font-weight: 600;">Introduction C++ was built as an extension to C and gave programmers a high control over memory and system resources. If you know any ...</span>
+                <span style="font-weight: 600;"><%=blog.desc%></span>
               </div>
             </div>
             <div class="extra content date">
               <a>
-                06 Jan, 2021
+                <%=blog.date.toLocaleDateString()%>
               </a>
             </div>
           </div>
     </div>
-    <% } %>
+    <% }) %>
 </div>
 
 <script type="text/javascript" src="/scripts/index.js"></script>

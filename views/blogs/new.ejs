@@ -11,7 +11,7 @@
     <div class="content">New Blog</div>
   </h2>
 
-   <form class="ui form">
+   <form class="ui form" action="/blogs" method="POST" enctype="multipart/form-data">
      <div class="ui stacked segment">
      <div id="title-field" class="field">
        <label>Title</label>
@@ -22,9 +22,10 @@
        <textarea name="desc" placeholder="Description" rows="5" required></textarea>
      </div>
      <div id="blog-img" class="field">
-       <label>Image</label>
-       <img src="#" id="image" class="ui small image">
-       <input id="file-img" type="file" name="filename">
+       <label style="margin-bottom: 0;">Thumbnail</label>
+       <br>
+       <img src="/wireframe_image.png" id="image" class="ui small image">
+       <input id="file-img" type="file" name="filename" accept="image/png, image/jpeg" required>
      </div>
      <div id="markdown-field" class="field">
        <label>Markdown</label>
