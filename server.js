@@ -1,35 +1,32 @@
 const express = require("express");
 const app = express();
+const path = require("path");
+const mongoose = require("mongoose");
+
+mongoose.connect("mongodb://localhost/blog", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
+
+//Routes
+const blogRoutes = require("./routes/blogs");
+const authRoutes = require("./routes/auth");
 
 //setup view engine and public dir
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public")); //path for styles
 app.use(express.static(__dirname + "/client")); //path for scripts
+app.use(express.static(path.join(__dirname, '/uploads'))); //For file uploads
+app.use(express.urlencoded({extended: false}));
 
+//Routes
+app.use("/blogs", blogRoutes);
+app.use("/", authRoutes);
+
+
+//Root
 app.get("/", (req, res) => {
     res.redirect("/blogs");
-});
-
-/*Home Page*/
-app.get("/blogs", (req, res) => {
-    res.render("index");
-});
-
-//Post Route
-app.get("/blogs/new", (req, res) => {
-    res.render("blogs/new");
-});
-
-
-
-
-//Auth Routes
-app.get("/login", (req, res) => {
-    res.render("auth/login");
-});
-
-app.get("/register", (req, res) => {
-    res.render("auth/register");
 });
 
 
