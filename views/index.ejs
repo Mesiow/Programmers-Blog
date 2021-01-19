@@ -13,14 +13,14 @@
               <div class="ui dimmer">
                 <div class="content">
                   <div class="center">
-                    <div class="ui inverted button">Read</div>
+                    <a class="ui inverted button" href="/blogs/<%=blog._id%>">Read</a>
                   </div>
                 </div>
               </div>
               <img src="/<%=blog.filename%>">
             </div>
             <div class="content">
-              <a class="header"><%=blog.title%></a>
+              <a class="header" href="/blogs/<%=blog._id%>"><%=blog.title%></a>
               <div class="meta">
                 <span style="font-weight: 600;"><%=blog.desc%></span>
               </div>

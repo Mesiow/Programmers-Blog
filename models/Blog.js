@@ -1,6 +1,14 @@
 const mongoose = require("mongoose");
 
 const blogSchema = new mongoose.Schema({
+    /*
+    author:{
+        id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+        },
+        username: String 
+    },*/
     title: {
         type: String,
         required: true

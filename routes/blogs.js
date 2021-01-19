@@ -47,6 +47,15 @@ router.get("/new", (req, res) => {
     res.render("blogs/new");
 });
 
+//Show blog route based on it's id
+router.get("/:id", async (req, res) => {
+    const id = req.params.id;
+    await Blog.findById(id, (err, foundBlog) => {
+        if(err) console.log(err);
+        res.render("blogs/show", {blog: foundBlog});
+    });
+});
+
 
 //Post
 //Post new blog to main page
