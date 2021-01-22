@@ -15,11 +15,13 @@
      <div class="ui stacked segment">
      <div id="title-field" class="field">
        <label>Title</label>
-       <input type="text" name="title" placeholder="Title" required>
+       <input type="text" name="title" value="<%=blog.title%>" placeholder="Title" required>
      </div>
      <div id="description-field" class="field">
        <label>Description</label>
-       <textarea name="desc" placeholder="Description" rows="5" required></textarea>
+       <textarea name="desc" placeholder="Description" rows="5" required>
+          <%=blog.desc%>
+       </textarea>
      </div>
      <div id="blog-img" class="field">
        <label style="margin-bottom: 0;">Thumbnail</label>
@@ -29,7 +31,9 @@
      </div>
      <div id="markdown-field" class="field">
        <label>Markdown</label>
-       <textarea name="markdown" rows="20" required></textarea>
+       <textarea name="markdown" rows="20" required>
+         <%=blog.markdown%>
+       </textarea>
      </div>
      <div id="buttons">
       <a id="cancel-blog-btn" class="ui red button" href="/">Cancel</a>

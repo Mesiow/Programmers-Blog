@@ -2,12 +2,23 @@
 
 <link rel="stylesheet" type="text/css" href="/stylesheets/show.css">
 
-<div class="ui text container">
-      <h2 class="ui image header" style="color: white;">
-        <i class="fas fa-code" style="font-size:xx-large;"></i>
+<div class="ui fluid container">
+  <div class="ui text container">
+      <h2 id="title" class="ui image header">
         <div class="content"><%=blog.title%></div>
       </h2>
-    
+
+      <img class="ui rounded image" src="/<%=blog.filename%>">
+
+    <div id="meta-data" class="ui item">
+      <div class="content">
+        <a class="header"><%=blog.author.username%></a>
+        <div class="meta">
+          <span><%=blog.date.toDateString()%></span>
+        </div>
+      </div>
+    </div>
+  </div>
     
 </div>
 
