@@ -36,30 +36,28 @@ const upload = multer({storage: storage, fileFilter: fileFilter});
 /*Home Page*/
 router.get("/", async (req, res) => {
     //Get blogs from Database
-    await Blog.find({}, (err, blogs) => {
-        if(err) console.log(err);
-        res.render("index", {blogs: blogs});
-    });
+    const blogs = await Blog.find().sort({
+        date: 'desc'}); //sort based on date
+    res.render("index", {blogs: blogs});
 });
 
 //New blog Route
 router.get("/new", (req, res) => {
-    res.render("blogs/new");
+    res.render("blogs/new", {blog: new Blog()});
 });
 
 //Show blog route based on it's id
-router.get("/:id", async (req, res) => {
-    const id = req.params.id;
-    await Blog.findById(id, (err, foundBlog) => {
-        if(err) console.log(err);
-        res.render("blogs/show", {blog: foundBlog});
-    });
+router.get("/:slug", async (req, res) => {
+    const blog = await Blog.findOne({slug: req.params.slug});
+    if(blog == null)
+        res.redirect('/');
+    res.render("blogs/show", {blog: blog});
 });
 
 
 //Post
 //Post new blog to main page
-router.post("/", upload.any(), (req, res, next) => {
+router.post("/", upload.any(), async (req, res, next) => {
     if(req.files && req.body){
         const newBlog = {
             title: req.body.title,
@@ -71,10 +69,13 @@ router.post("/", upload.any(), (req, res, next) => {
 
         //Save to database
         const blog = new Blog(newBlog);
-        blog.save((err) => {
-            if(err) console.log(err);
+        await blog.save((err) => {
+            if(err){
+                console.log(err);
+                res.render("blogs/new", {blog: newBlog});
+            }
         });
-        res.redirect("/");
+        res.redirect(`blogs/${blog.slug}`);
     }else{
         console.log("No File uploaded");
     }
