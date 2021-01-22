@@ -1,5 +1,4 @@
 
-
 $(document).ready(function(){
     $("#file-img").change(function() {
         if(this.files && this.files[0]){

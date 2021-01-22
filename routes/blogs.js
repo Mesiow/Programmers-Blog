@@ -75,7 +75,7 @@ router.post("/", upload.any(), async (req, res, next) => {
                 res.render("blogs/new", {blog: newBlog});
             }
         });
-        res.redirect(`blogs/${blog.slug}`);
+        res.redirect(`/blogs/${blog.slug}`);
     }else{
         console.log("No File uploaded");
     }
