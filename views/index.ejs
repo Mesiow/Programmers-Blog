@@ -17,12 +17,18 @@
                   </div>
                 </div>
               </div>
-              <img src="/<%=blog.filename%>">
+              <img src="/<%=blog.filename%>" style="height: 145px;">
             </div>
             <div class="content">
               <a class="header" href="/blogs/<%=blog.slug%>"><%=blog.title%></a>
               <div class="meta">
-                <span style="font-weight: 600;"><%=blog.desc%></span>
+                <span style="font-weight: 600;">
+                  <% if(blog.desc.length > 100){ %>
+                      <%blog.desc = blog.desc.slice(0, 100);%>
+                      <%blog.desc = blog.desc.concat("...");%>
+                  <%}%>
+                  <%=blog.desc%>
+                </span>
               </div>
             </div>
             <div class="extra content date">
