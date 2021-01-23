@@ -14,25 +14,42 @@
 .ui.text.container{
     color: black;
     text-align: center;
-    border: 2px solid black;
-    background: #fffafa;
+    outline: none !important;
+    border:1px solid #21ba45;
+    box-shadow: 0 0 20px #719ECE;
+    background: #ffffff;
 }
 
 #title{
+    margin-top: 10px;
     font-size: xx-large;
 }
 
 #blog-img{
-    border: 1px solid black;
+  border-bottom: 1px solid #719ECE;
+  box-shadow: 0 4px 2px -2px #719ECE;
 }
 
 #meta-data{
-    padding-right: 27em;
+    color: gray;
+    padding-top: 2px;
+    padding-right: 28em;
 }
 
 #markdown{
-   border: 1px solid black;
-   margin: 10px;
+  outline: none !important;
+  box-shadow: 0 0 12px #719ECE;
+  margin: 10px;
+}
+
+.actions{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+}
+
+#delete-btn{
+  margin-right: 0;
 }
 
 img.ui.image{
