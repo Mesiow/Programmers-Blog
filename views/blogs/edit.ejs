@@ -1,0 +1,52 @@
+<%- include("../partials/header") %>
+
+<link rel="stylesheet" type="text/css" href="/stylesheets/new.css">
+
+
+<div class="ui middle aligned center aligned grid">
+<div class="column">
+<!--<div id="form-segment" class="ui segment">-->
+  <h2 class="ui image header" style="color: white;">
+    <i class="fas fa-code" style="font-size:xx-large;"></i>
+    <div class="content">Edit Blog</div>
+  </h2>
+
+   <form class="ui form" action="/blogs" method="POST" enctype="multipart/form-data">
+     <div class="ui stacked segment">
+     <div id="title-field" class="field">
+       <label>Title</label>
+       <input type="text" name="title" value="<%=blog.title%>" placeholder="Title" required>
+     </div>
+     <div id="description-field" class="field">
+       <label>Description</label>
+       <textarea name="desc" placeholder="Description" rows="5" required>
+          <%=blog.desc%>
+       </textarea>
+     </div>
+     <div id="blog-img" class="field">
+       <label style="margin-bottom: 0;">Thumbnail</label>
+       <br>
+       <img src="/wireframe_image.png" id="image" class="ui small image">
+       <input id="file-img" type="file" name="filename" accept="image/png, image/jpeg" required>
+     </div>
+     <div id="markdown-field" class="field">
+       <label>Markdown</label>
+       <textarea name="markdown" rows="20" required>
+         <%=blog.markdown%>
+       </textarea>
+     </div>
+     <div id="buttons">
+      <a id="cancel-blog-btn" class="ui red button" href="/">Cancel</a>
+      <button id="submit-blog-btn"class="ui green button" type="submit">Submit</button>
+     </div>
+    </div>
+    </form>
+
+</div>
+</div>
+
+<script type="text/javascript" src="/scripts/new.js"></script>
+
+
+
+<%- include("../partials/footer") %>

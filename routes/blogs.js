@@ -46,6 +46,7 @@ router.get("/new", (req, res) => {
     res.render("blogs/new", {blog: new Blog()});
 });
 
+
 //Show blog route based on it's id
 router.get("/:slug", async (req, res) => {
     const blog = await Blog.findOne({slug: req.params.slug});
@@ -80,5 +81,19 @@ router.post("/", upload.any(), async (req, res, next) => {
         console.log("No File uploaded");
     }
 });
+
+//Edit blog 
+router.get("/:slug/edit", async (req, res) => {
+    await Blog.find({slug: req.params.slug}, (err, blog) => {
+        if(err){
+            console.log(err);
+            res.redirect("/");
+        }
+        res.render("blogs/edit", {blog: blog});
+    });  
+});
+
+
+
 
 module.exports = router;

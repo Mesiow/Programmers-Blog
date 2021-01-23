@@ -46,8 +46,7 @@ const blogSchema = new mongoose.Schema({
 //Pre validate before saving article to db
 blogSchema.pre('validate', function(next) {
     if(this.title){
-        this.slug = slugify(this.title, {lower: true, 
-        strict: true});
+        this.slug = slugify(this.title, {lower: true, strict: true});
     }
     if(this.markdown){
         this.sanitizedHtml = dompurify.sanitize(marked(this.markdown));
