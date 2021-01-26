@@ -2,8 +2,10 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const mongoose = require("mongoose");
+const methodOverride = require("method-override");
 
 mongoose.set('useCreateIndex', true);
+mongoose.set('useFindAndModify', false);
 mongoose.connect("mongodb://localhost/blog", {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -19,6 +21,7 @@ app.use(express.static(__dirname + "/public")); //path for styles
 app.use(express.static(__dirname + "/client")); //path for scripts
 app.use(express.static(__dirname + "/models"));
 app.use(express.static(path.join(__dirname, '/uploads'))); //For file uploads
+app.use(methodOverride("_method"));
 app.use(express.urlencoded({extended: false}));
 
 //Routes
