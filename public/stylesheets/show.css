@@ -52,6 +52,10 @@
   margin-right: 0;
 }
 
+#delete-form{
+  margin: 0;
+}
+
 img.ui.image{
     margin: auto;
     width: 80%;

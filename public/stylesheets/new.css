@@ -29,3 +29,21 @@
     cursor: pointer;
     font-size: 10pt;
 }
+
+.hidden{
+    display:none;
+}
+
+#img-label{
+    color: white;
+    display: inline-block;
+    /*background: #1CB6E0;*/
+    background: gray;
+    border: none;
+    padding: 7px 15px;
+    font-weight: 700;
+    border-radius: 3px;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 10pt;
+}
