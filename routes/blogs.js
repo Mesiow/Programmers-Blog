@@ -64,10 +64,11 @@ router.post("/", upload.any(), async (req, res, next) => {
             title: req.body.title,
             desc: req.body.desc,
             filename: req.files[0].filename,
+            filenameCopy: req.body.filenameCopy,
             markdown: req.body.markdown,
             date: Date.now()
         }
-
+        console.log(newBlog);
         //Save to database
         const blog = new Blog(newBlog);
         await blog.save((err) => {
@@ -82,9 +83,9 @@ router.post("/", upload.any(), async (req, res, next) => {
     }
 });
 
-//Edit blog 
+//Edit blogs
 router.get("/:slug/edit", async (req, res) => {
-    await Blog.find({slug: req.params.slug}, (err, blog) => {
+    await Blog.findOne({slug: req.params.slug}, (err, blog) => {
         if(err){
             console.log(err);
             res.redirect("/");
@@ -92,6 +93,45 @@ router.get("/:slug/edit", async (req, res) => {
         res.render("blogs/edit", {blog: blog});
     });  
 });
+
+
+router.put("/:slug", (req, res) => {
+
+    let filename = "";
+    if(req.files){
+        filename = req.files[0].filename;
+    }
+    const updatedBlog = {
+        title: req.body.title,
+        desc: req.body.desc,
+        filename: filename,
+        filenameCopy: req.body.filenameCopy,
+        markdown: req.body.markdown,
+        date: Date.now()
+    }
+    console.log(updatedBlog);
+
+    //did user change thumbnail while editing?
+    //User did not change thumbnail
+    if(updatedBlog.filename === updatedBlog.filenameCopy){
+        console.log("user did not change thumbnail");
+    }else{
+        console.log("user changed thumbnail");
+    }
+});
+
+
+//Delete route
+router.delete("/:slug", async (req, res) => {
+    await Blog.findOneAndRemove({slug: req.params.slug}, (err) => {
+        if(err){
+            console.log(err);
+            res.redirect("/");
+        }
+        res.redirect("/");
+    });
+});
+
 
 
 

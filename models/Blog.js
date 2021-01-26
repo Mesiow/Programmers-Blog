@@ -22,7 +22,10 @@ const blogSchema = new mongoose.Schema({
     },
     filename: {
         type: String,
-        require: true
+        required: true
+    },
+    filenameCopy:{
+        type: String,
     },
     markdown: {
         type: String,
