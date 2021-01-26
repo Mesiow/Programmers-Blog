@@ -11,7 +11,7 @@
     <div class="content">Edit Blog</div>
   </h2>
 
-   <form class="ui form" action="/blogs" method="POST" enctype="multipart/form-data">
+   <form class="ui form" action="/blogs/<%=blog.slug%>?_method=PUT" method="POST" enctype="multipart/form-data">
      <div class="ui stacked segment">
      <div id="title-field" class="field">
        <label>Title</label>
@@ -26,8 +26,8 @@
      <div id="blog-img" class="field">
        <label style="margin-bottom: 0;">Thumbnail</label>
        <br>
-       <img src="/wireframe_image.png" id="image" class="ui small image">
-       <input id="file-img" type="file" name="filename" accept="image/png, image/jpeg" required>
+       <img src="/<%=blog.filename%>" id="image" class="ui small image">
+       <input id="file-img" type="file" name="filename" accept="image/png, image/jpeg">
      </div>
      <div id="markdown-field" class="field">
        <label>Markdown</label>
@@ -37,7 +37,7 @@
      </div>
      <div id="buttons">
       <a id="cancel-blog-btn" class="ui red button" href="/">Cancel</a>
-      <button id="submit-blog-btn"class="ui green button" type="submit">Submit</button>
+      <button id="submit-blog-btn"class="ui primary button" type="submit">Save</button>
      </div>
     </div>
     </form>
