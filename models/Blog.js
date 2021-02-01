@@ -22,7 +22,6 @@ const blogSchema = new mongoose.Schema({
     },
     filename: {
         type: String,
-        required: true
     },
     filenameCopy:{
         type: String,

@@ -17,7 +17,11 @@
                   </div>
                 </div>
               </div>
-              <img src="/<%=blog.filename%>" style="height: 145px;">
+              <% if(blog.filename !== '') {%>
+                <img src="/<%=blog.filename%>" style="height: 145px;">
+              <%}else{%>
+                <img src="/<%=blog.filenameCopy%>" style="height: 145px;">
+              <%}%>
             </div>
             <div class="content">
               <a class="header" href="/blogs/<%=blog.slug%>"><%=blog.title%></a>

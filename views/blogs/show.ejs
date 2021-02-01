@@ -7,8 +7,11 @@
       <h2 id="title" class="ui image header">
         <div class="content"><%=blog.title%></div>
       </h2>
-
-      <img id="blog-img" class="ui rounded image" src="/<%=blog.filename%>">
+      <% if(blog.filename !== '') {%>
+          <img id="blog-img" class="ui rounded image" src="/<%=blog.filename%>">
+      <%}else{%>
+        <img id="blog-img" class="ui rounded image" src="/<%=blog.filenameCopy%>">
+      <%}%>
 
     <div id="meta-data" class="ui item">
       <div class="content">
@@ -26,7 +29,7 @@
 
     <!--Edit and Update buttons-->
     <div class="actions">
-        <a id="edit-btn" class="ui green button" href="/blogs/<%=blog.slug%>/edit">Edit</a>
+        <a id="edit-btn" class="ui green button" href="/blogs/edit/<%=blog.id%>">Edit</a>
         <form id="delete-form" action="/blogs/<%=blog.slug%>?_method=DELETE" method="POST">
           <button id="delete-btn" class="ui red button">Delete</button>
         </form>

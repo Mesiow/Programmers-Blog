@@ -47,11 +47,12 @@ router.get("/new", (req, res) => {
 });
 
 
-//Show blog route based on it's id
+//Show blog route based on it's slug
 router.get("/:slug", async (req, res) => {
     const blog = await Blog.findOne({slug: req.params.slug});
-    if(blog == null)
-        res.redirect('/');
+    console.log("Show: ", blog);
+    if(blog == null) res.redirect('/');
+
     res.render("blogs/show", {blog: blog});
 });
 
@@ -59,33 +60,13 @@ router.get("/:slug", async (req, res) => {
 //Post
 //Post new blog to main page
 router.post("/", upload.any(), async (req, res, next) => {
-    if(req.files && req.body){
-        const newBlog = {
-            title: req.body.title,
-            desc: req.body.desc,
-            filename: req.files[0].filename,
-            filenameCopy: req.body.filenameCopy,
-            markdown: req.body.markdown,
-            date: Date.now()
-        }
-        console.log(newBlog);
-        //Save to database
-        const blog = new Blog(newBlog);
-        await blog.save((err) => {
-            if(err){
-                console.log(err);
-                res.render("blogs/new", {blog: newBlog});
-            }
-        });
-        res.redirect(`/blogs/${blog.slug}`);
-    }else{
-        console.log("No File uploaded");
-    }
-});
+    req.blog = new Blog();
+    next();
+}, saveBlogAndRedirect("new"));
 
 //Edit blogs
-router.get("/:slug/edit", async (req, res) => {
-    await Blog.findOne({slug: req.params.slug}, (err, blog) => {
+router.get("/edit/:id", async (req, res) => {
+    await Blog.findById(req.params.id, (err, blog) => {
         if(err){
             console.log(err);
             res.redirect("/");
@@ -95,30 +76,11 @@ router.get("/:slug/edit", async (req, res) => {
 });
 
 
-router.put("/:slug", (req, res) => {
+router.put("/:id", upload.single("filename"), async (req, res, next) => {
+   req.blog = await Blog.findById(req.params.id);
+   next();
 
-    let filename = "";
-    if(req.files){
-        filename = req.files[0].filename;
-    }
-    const updatedBlog = {
-        title: req.body.title,
-        desc: req.body.desc,
-        filename: filename,
-        filenameCopy: req.body.filenameCopy,
-        markdown: req.body.markdown,
-        date: Date.now()
-    }
-    console.log(updatedBlog);
-
-    //did user change thumbnail while editing?
-    //User did not change thumbnail
-    if(updatedBlog.filename === updatedBlog.filenameCopy){
-        console.log("user did not change thumbnail");
-    }else{
-        console.log("user changed thumbnail");
-    }
-});
+}, saveBlogAndRedirect("edit"));
 
 
 //Delete route
@@ -131,6 +93,31 @@ router.delete("/:slug", async (req, res) => {
         res.redirect("/");
     });
 });
+
+function saveBlogAndRedirect(path) {
+    return async (req, res) => {
+            let filename = "";
+            if(req.files){
+                filename = req.files[0].filename;
+            }
+            console.log("filename: ",filename);
+            let blog = req.blog;
+            blog.title = req.body.title;
+            blog.desc = req.body.desc;
+            blog.filename = filename,
+            blog.filenameCopy = req.body.filenameCopy;
+            blog.markdown = req.body.markdown;
+
+            //Save to database
+            try{
+                blog = await blog.save();
+                res.redirect(`/blogs/${blog.slug}`);
+            }catch(e){
+                console.log(e);
+                res.render(`/blogs/${path}`, {blog: blog});
+            }
+    }
+}
 
 
 

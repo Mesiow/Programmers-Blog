@@ -11,7 +11,7 @@
     <div class="content">Edit Blog</div>
   </h2>
 
-   <form class="ui form" action="/blogs/<%=blog.slug%>?_method=PUT" method="POST" enctype="multipart/form-data">
+   <form class="ui form" action="/blogs/<%=blog.id%>?_method=PUT" method="POST" enctype="multipart/form-data">
      <div class="ui stacked segment">
      <div id="title-field" class="field">
        <label>Title</label>
@@ -19,21 +19,24 @@
      </div>
      <div id="description-field" class="field">
        <label>Description</label>
-       <textarea name="desc" placeholder="Description" rows="5" required>
-          <%=blog.desc%>
-       </textarea>
+       <textarea name="desc" placeholder="Description" rows="5" required><%=blog.desc%></textarea>
      </div>
      <div id="blog-img" class="field">
        <label style="margin-bottom: 0;">Thumbnail</label>
        <br>
-       <img src="/<%=blog.filename%>" id="image" class="ui small image">
+      
+       <% if(blog.filename !== '') {%>
+        <img id="image" class="ui small image" src="/<%=blog.filename%>">
+       <%}else{%>
+        <img id="image" class="ui small image" src="/<%=blog.filenameCopy%>">
+       <%}%>
+
        <input id="file-img" type="file" name="filename" accept="image/png, image/jpeg">
+       <input id="copy-img" type="text" name="filenameCopy" value="<%=blog.filenameCopy%>"class="hidden">
      </div>
      <div id="markdown-field" class="field">
        <label>Markdown</label>
-       <textarea name="markdown" rows="20" required>
-         <%=blog.markdown%>
-       </textarea>
+       <textarea name="markdown" rows="20" required><%=blog.markdown%></textarea>
      </div>
      <div id="buttons">
       <a id="cancel-blog-btn" class="ui red button" href="/">Cancel</a>
