@@ -3,10 +3,14 @@
     background-color: rgba(57, 58, 57, 0.801);
 }
 
+.ui.stacked.segment{
+    box-shadow: 5px 5px 8px 2px #aaaaaa;
+}
 
 #msg{
     margin-left: 20%;
     margin-right: 20%;
+    box-shadow: 5px 5px 8px 2px #aaaaaa;
 }
 
 .ui.form{

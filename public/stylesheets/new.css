@@ -3,6 +3,10 @@
     width: 100%px;
 }
 
+.ui.stacked.segment{
+    box-shadow: 5px 5px 8px 2px #aaaaaa;
+}
+
 .ui.form textarea{
     resize: none
 }
