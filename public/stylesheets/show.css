@@ -2,7 +2,7 @@
     /*background: #586474;
     *//*margin: 10px 30px 0 30px !important;
     */background: #fff;
-    width: 900px;
+    /*width: 900px;*/
     padding: 10px 50px 10px 50px;
     border-radius: 5px;
     -webkit-border-radius: 5px;
@@ -12,11 +12,11 @@
 }
 
 .ui.text.container{
+    max-width: none !important;
     color: black;
     text-align: center;
     outline: none !important;
-    border:1px solid #21ba45;
-    box-shadow: 0 0 20px #719ECE;
+    box-shadow: 5px 5px 8px 2px #aaaaaa;
     background: #ffffff;
 }
 
@@ -26,26 +26,30 @@
 }
 
 #blog-img{
-  border-bottom: 1px solid #719ECE;
-  box-shadow: 0 4px 2px -2px #719ECE;
+ margin:auto;
+ width: 80%;
+ height: 60%;
 }
 
 #meta-data{
+    display:flex;
     color: gray;
     padding-top: 2px;
-    padding-right: 28em;
+    padding-right: 27em;
+    margin-left: 10%;
 }
 
 #markdown{
   outline: none !important;
-  box-shadow: 0 0 12px #719ECE;
-  margin: 10px;
+  text-align: justify;
+  margin: 5%;
 }
 
 .actions{
     display: flex;
     justify-content: space-between;
     margin: 10px;
+    padding-bottom: 10px;
 }
 
 #delete-btn{
@@ -54,9 +58,4 @@
 
 #delete-form{
   margin: 0;
-}
-
-img.ui.image{
-    margin: auto;
-    width: 80%;
 }
