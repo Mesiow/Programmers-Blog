@@ -1,6 +1,7 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const router = express.Router();
+const passport = require("passport");
 
 const User = require("../models/User");
 
@@ -14,21 +15,11 @@ router.get("/register", (req, res) => {
     res.render("auth/register");
 });
 
-router.post("/login", async(req, res) => {
-    try{
-        const user = await User.findOne({email: req.body.email});
-        bcrypt.compare(req.body.password, user.password, (err, result) => {
-            if(result){
-                console.log("login success");
-                res.redirect("/");
-            }else{
-                console.log("login failed");
-            }
-        });
-    }catch{
-        res.redirect("/register");
-    }
-});
+router.post("/login", passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/login',
+    failureFlash: true
+}));
 
 
 router.post("/register", async(req, res) => {

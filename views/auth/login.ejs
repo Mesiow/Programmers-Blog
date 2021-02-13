@@ -2,12 +2,16 @@
 <link rel="stylesheet" type="text/css" href="/stylesheets/auth.css">
 
 
+
 <div class="ui middle aligned center aligned grid">
 <div class="column">
-  <h2 class="ui image header" style="color: white;">
+  <h2 class="ui image header">
     <i class="fas fa-code" style="font-size:xx-large;"></i>
     <div class="content">Log-in to your account</div>
   </h2>
+  <%if(messages.error){ %>
+    <h2><%=messages.error%></h2>
+  <%}%>
 <form class="ui large form" action="/login" method="POST">
   <div class="ui stacked segment">
     <div id="email-field" class="field">
