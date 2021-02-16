@@ -5,12 +5,14 @@
 
 <div class="ui middle aligned center aligned grid">
 <div class="column">
-  <h2 class="ui image header">
-    <i class="fas fa-code" style="font-size:xx-large;"></i>
+  <!--<h2 class="ui image header">
+  <i class="fas fa-code" style="font-size:xx-large;"></i>
     <div class="content">Log-in to your account</div>
-  </h2>
+  </h2>-->
   <%if(messages.error){ %>
-    <h2><%=messages.error%></h2>
+    <h2 
+    style="color:white;
+    background: red;"><%=messages.error%></h2>
   <%}%>
 <form class="ui large form" action="/login" method="POST">
   <div class="ui stacked segment">

@@ -7,6 +7,10 @@ async function getUserByEmail(email){
     return await User.findOne({email: email});
 }
 
+async function getUserById(id){
+    return await User.findById({id: id});
+}
+
 function init(passport){
     const authenticateUser = async (email, password, done) => {
         console.log(email);
@@ -30,7 +34,7 @@ function init(passport){
 
     passport.use(new LocalStrategy({usernameField: 'email'},
     authenticateUser));
-    passport.serializeUser((user, done) => {});
-    passport.deserializeUser((id, done) => {});
+    passport.serializeUser(User.serializeUser()); //responsible for encoding data
+    passport.deserializeUser(User.deserializeUser()); //responsible for taking data from the session and unencoding it
 }
 module.exports = init;
