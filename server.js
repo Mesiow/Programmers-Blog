@@ -41,6 +41,11 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use((req, res, next) => {
+    res.locals.currentUser = req.user; //allows access to currentUser in every ejs template
+    next();
+})
+
 //Routes
 app.use("/blogs", blogRoutes);
 app.use("/", authRoutes);

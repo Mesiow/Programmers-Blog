@@ -43,7 +43,12 @@
           </a>
           <div class="right menu">
               <a class="item" href="/blogs/new"><i class="fas fa-plus" style="padding-right: 5px;"></i>Post</a>
-              <a class="item" href="/login">Sign-up / Sign-in</a>
+              <% if(!currentUser){%>
+                <a class="item" href="/login">Sign-up / Sign-in</a>
+              <%}else{%>
+                <a class="disabled item" href="#">Signed in as <%=currentUser.username%></a>
+                <a class="item" href="/logout">Logout</a>
+              <%}%>
           </div>
         </div>
   </div>
