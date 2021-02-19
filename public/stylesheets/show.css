@@ -32,11 +32,20 @@
 }
 
 #meta-data{
+  display:inline;
+  color: gray;
+  /*
     display:flex;
     color: gray;
     padding-top: 2px;
     padding-right: 27em;
-    margin-left: 10%;
+    margin-left: 10%;*/
+   
+}
+
+#meta-author{
+ color: #4183c4;
+ padding-right: 10em;
 }
 
 #markdown{

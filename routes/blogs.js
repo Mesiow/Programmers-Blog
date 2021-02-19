@@ -8,6 +8,8 @@ const multer = require("multer");
 /*Models*/
 const Blog = require("../models/Blog");
 
+const middleware = require("./middleware");
+
 //Where to upload the file
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -42,7 +44,7 @@ router.get("/", async (req, res) => {
 });
 
 //New blog Route
-router.get("/new", (req, res) => {
+router.get("/new", middleware.isLoggedIn, (req, res) => {
     res.render("blogs/new", {blog: new Blog()});
 });
 
@@ -100,8 +102,16 @@ function saveBlogAndRedirect(path) {
             if(req.files){
                 filename = req.files[0].filename;
             }
+            console.log(req.user);
             console.log("filename: ",filename);
+
+           let author = {
+               id: req.user.id,
+               username: req.user.username
+           };
+
             let blog = req.blog;
+            blog.author = author;
             blog.title = req.body.title;
             blog.desc = req.body.desc;
             blog.filename = filename,
