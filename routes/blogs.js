@@ -61,13 +61,13 @@ router.get("/:slug", async (req, res) => {
 
 //Post
 //Post new blog to main page
-router.post("/", upload.any(), async (req, res, next) => {
+router.post("/", middleware.isLoggedIn, upload.any(), async (req, res, next) => {
     req.blog = new Blog();
     next();
 }, saveBlogAndRedirect("new"));
 
 //Edit blogs
-router.get("/edit/:id", async (req, res) => {
+router.get("/edit/:id", middleware.checkBlogOwnership, async (req, res) => {
     await Blog.findById(req.params.id, (err, blog) => {
         if(err){
             console.log(err);
@@ -78,7 +78,7 @@ router.get("/edit/:id", async (req, res) => {
 });
 
 
-router.put("/:id", upload.single("filename"), async (req, res, next) => {
+router.put("/:id", middleware.checkBlogOwnership, upload.single("filename"), async (req, res, next) => {
    req.blog = await Blog.findById(req.params.id);
    next();
 
@@ -86,7 +86,7 @@ router.put("/:id", upload.single("filename"), async (req, res, next) => {
 
 
 //Delete route
-router.delete("/:slug", async (req, res) => {
+router.delete("/:slug", middleware.checkBlogOwnership, async (req, res) => {
     await Blog.findOneAndRemove({slug: req.params.slug}, (err) => {
         if(err){
             console.log(err);
