@@ -13,14 +13,7 @@
         <img id="blog-img" class="ui rounded image" src="/<%=blog.filenameCopy%>">
       <%}%>
 
-    <div id="meta-data" class="ui item">
-      <div class="content">
-        <div class="meta">
-          <span id="meta-author">by <%=blog.author.username%></span>
-          <span><%=blog.date.toDateString()%></span>
-        </div>
-      </div>
-    </div>
+    
     <div id="markdown" class="ui item">
       <div>
         <%-blog.sanitizedHtml%>
@@ -29,10 +22,12 @@
 
     <!--Edit and Update buttons-->
     <div class="actions">
+    <%if(currentUser && blog.author.id.equals(currentUser._id)){%>
         <a id="edit-btn" class="ui blue button" href="/blogs/edit/<%=blog.id%>">Edit</a>
         <form id="delete-form" action="/blogs/<%=blog.slug%>?_method=DELETE" method="POST">
           <button id="delete-btn" class="ui red button">Delete</button>
         </form>
+    <%}%>
     </div>
   </div>
     
