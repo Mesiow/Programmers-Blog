@@ -24,19 +24,26 @@ router.post("/login", passport.authenticate('local', {
 
 
 router.post("/register", async(req, res) => {
-    try{
-        const hashedPass = await bcrypt.hash(req.body.password, 10);
-        const user = await new User({
-            username: req.body.username,
-            email: req.body.email,
-            password: hashedPass
-        });
-        await user.save();
 
-        res.redirect("/login");
-    }catch{
-        res.redirect("/register");
-    }
+        const hashedPass = await bcrypt.hash(req.body.password, 10);
+        if(await bcrypt.compare(req.body.confirmpass, hashedPass)){
+            try{
+                const user = await new User({
+                    username: req.body.username,
+                    email: req.body.email,
+                    password: hashedPass
+                });
+                await user.save();
+                res.redirect("/login");
+    
+            }catch{
+                res.redirect("/register");
+            }  
+        }
+        else{ 
+            console.log("Password confirm failed");
+            res.redirect("/register");
+        } 
 });
 
 router.get("/logout", (req, res) => {
