@@ -35,11 +35,11 @@
                 </span>
               </div>
             </div>
-            <div class="extra content date" style="position: relative">
+            <div class="extra content date" style="display:flex; justify-content: space-evenly;">
               <a>
                 <%=blog.date.toLocaleDateString()%>
               </a>
-              <a>by <%=blog.author.username%></a>
+              <a id="meta-author">by <%=blog.author.username%></a>
             </div>
           </div>
     </div>
