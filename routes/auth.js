@@ -24,7 +24,28 @@ router.post("/login", passport.authenticate('local', {
 
 
 router.post("/register", async(req, res) => {
+    handleNewRegistration(req, res);     
+});
 
+router.get("/logout", (req, res) => {
+    req.logout();
+    res.redirect("/");
+});
+
+async function handleNewRegistration(req, res){
+    //Check username
+    const username = await User.findOne({username: req.body.username});
+    const email = await User.findOne({email: req.body.email});
+    if(username != null){
+        req.flash("error", "A user with that username already exists");
+        res.redirect("/register");
+    }
+    //Check email
+    else if(email !== null){
+        req.flash("error", "A user with that E-mail already exists");
+        res.redirect("/register");
+    }else{
+        //Check if user confirmed pass
         const hashedPass = await bcrypt.hash(req.body.password, 10);
         if(await bcrypt.compare(req.body.confirmpass, hashedPass)){
             try{
@@ -41,15 +62,11 @@ router.post("/register", async(req, res) => {
             }  
         }
         else{ 
-            console.log("Password confirm failed");
+            req.flash("error", "Passwords do not match");
             res.redirect("/register");
         } 
-});
-
-router.get("/logout", (req, res) => {
-    req.logout();
-    res.redirect("/");
-})
+    }
+}
 
 
 module.exports = router;
