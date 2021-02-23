@@ -52,7 +52,6 @@ router.get("/new", middleware.isLoggedIn, (req, res) => {
 //Show blog route based on it's slug
 router.get("/:slug", async (req, res) => {
     const blog = await Blog.findOne({slug: req.params.slug});
-    console.log("Show: ", blog);
     if(blog == null) res.redirect('/');
 
     res.render("blogs/show", {blog: blog});
@@ -86,8 +85,8 @@ router.put("/:id", middleware.checkBlogOwnership, upload.single("filename"), asy
 
 
 //Delete route
-router.delete("/:slug", middleware.checkBlogOwnership, async (req, res) => {
-    await Blog.findOneAndRemove({slug: req.params.slug}, (err) => {
+router.delete("/:id", middleware.checkBlogOwnership, async (req, res) => {
+    await Blog.findByIdAndRemove(req.params.id, (err) => {
         if(err){
             console.log(err);
             res.redirect("/");
@@ -102,9 +101,7 @@ function saveBlogAndRedirect(path) {
             if(req.files){
                 filename = req.files[0].filename;
             }
-            console.log(req.user);
-            console.log("filename: ",filename);
-
+        
            let author = {
                id: req.user.id,
                username: req.user.username

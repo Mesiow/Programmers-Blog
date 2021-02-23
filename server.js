@@ -12,10 +12,19 @@ const envsetup = require("./env_setup");
 
 mongoose.set('useCreateIndex', true);
 mongoose.set('useFindAndModify', false);
-mongoose.connect("mongodb://localhost/blog", {
+
+const uri = `mongodb+srv://Chris:${process.env.MONGODB_ATLAS_PASS}@blogcluster.pqtbf.mongodb.net/blog?retryWrites=true&w=majority`
+            || process.env.LOCAL_DB_URL;
+
+
+mongoose.connect(uri , {
     useNewUrlParser: true,
     useUnifiedTopology: true
-});
+}).then(() => {
+    console.log("Connected to blog db at ", uri);
+}).catch(err => {
+    console.log("Error: ", err.message);
+})
 
 const init = require("./passport_config");
 init(passport);

@@ -13,10 +13,7 @@ async function getUserById(id){
 
 function init(passport){
     const authenticateUser = async (email, password, done) => {
-        console.log(email);
-        console.log(password);
         const user = await getUserByEmail(email);
-        console.log(user);
         if(user === null){
             return done(null, false, {message: "No user with that email"});
         }
