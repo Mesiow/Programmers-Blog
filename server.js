@@ -23,7 +23,11 @@ mongoose.connect(uri , {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => {
-    console.log("Connected to blog db at ", uri);
+    if(uri == env.local_db_uri)
+        console.log("Connected to local db");
+    else{
+        console.log("Connected to remote db");
+    }
 }).catch(err => {
     console.log("Error: ", err.message);
 })
