@@ -6,15 +6,17 @@ const methodOverride = require("method-override");
 const passport = require("passport");
 const flash = require("express-flash");
 const session = require("express-session");
-const envsetup = require("./env_setup");
+
+
+const env = require("./env_setup");
 
 
 
 mongoose.set('useCreateIndex', true);
 mongoose.set('useFindAndModify', false);
 
-const uri = `mongodb+srv://Chris:${process.env.MONGODB_ATLAS_PASS}@blogcluster.pqtbf.mongodb.net/blog?retryWrites=true&w=majority`
-            || process.env.LOCAL_DB_URL;
+const uri = `mongodb+srv://Chris:${env.atlas_pass}@blogcluster.pqtbf.mongodb.net/blog?retryWrites=true&w=majority`
+            || env.local_db_uri;
 
 
 mongoose.connect(uri , {
@@ -43,7 +45,7 @@ app.use(methodOverride("_method"));
 app.use(express.urlencoded({extended: false}));
 app.use(flash());
 app.use(session({
-    secret: process.env.SESSION_SECRET,
+    secret: env.session_id,
     resave: false,
     saveUninitialized: false
 }));
