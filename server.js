@@ -44,7 +44,7 @@ app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public")); //path for styles
 app.use(express.static(__dirname + "/client")); //path for scripts
 app.use(express.static(__dirname + "/models"));
-app.use(express.static(path.join(__dirname, '/uploads'))); //For file uploads
+app.use(express.static(__dirname + "/uploads")); //For file uploads
 app.use(methodOverride("_method"));
 app.use(express.urlencoded({extended: false}));
 app.use(flash());
