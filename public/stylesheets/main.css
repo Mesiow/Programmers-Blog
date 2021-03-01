@@ -43,6 +43,10 @@ body{
     box-shadow: 5px 5px 8px 2px #aaaaaa;
 }
 
+#meta-author{
+    display: inline-block;
+}
+
 
 /*Forms*/
 .ui.form .field > label{
