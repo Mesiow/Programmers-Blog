@@ -5,32 +5,13 @@ const path = require("path");
 /*node.js middleware for handling uploading files*/
 const multer = require("multer");
 
+const upload = require("../upload.js");
+
 /*Models*/
 const Blog = require("../models/Blog");
 
 const middleware = require("./middleware");
 
-//Where to upload the file
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'uploads'); //which folder the uploaded files will be stored
-    },
-    filename: (req, file, cb) => {
-        cb(null, file.originalname); //save file as original file name
-    }
-});
-
-const fileFilter = (req, file, cb) => {
-    if(file.mimetype == 'image/jpeg' || file.mimetype == 
-    'image/png'){
-        cb(null, true);
-    }else{
-        cb(null, false);
-    }
-}
-
-//Middleware
-const upload = multer({storage: storage, fileFilter: fileFilter});
 
 
 
@@ -98,9 +79,12 @@ router.delete("/:id", middleware.checkBlogOwnership, async (req, res) => {
 function saveBlogAndRedirect(path) {
     return async (req, res) => {
             let filename = "";
+            let mimetype = "";
             if(req.files){
                 filename = req.files[0].filename;
+                mimetype = req.files[0].mimetype;
             }
+            console.log(req.files);
         
            let author = {
                id: req.user.id,
