@@ -9,7 +9,7 @@ module.exports = {
     local_db_uri: process.env.LOCAL_DB_URL,
     session_id: process.env.SESSION_SECRET,
 
-    aws_user_key: process.env.AWS_IAM_USER_KEY,
-    aws_secret_access_key: process.env.AWS_IAM_USER_SECRET,
-    aws_bucket_name: process.env.AWS_BUCKET_NAME
+    aws_user_key: process.env.AWS_ACCESS_KEY_ID,
+    aws_secret_access_key: process.env.AWS_SECRET_ACCESS_KEY,
+    aws_bucket_name: process.env.S3_BUCKET_NAME
 }

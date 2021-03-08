@@ -6,7 +6,7 @@ const multerS3 = require("multer-s3");
 const s3Config = new aws.S3({
     accessKeyId: env.aws_user_key,
     secretAccessKey: env.aws_secret_access_key,
-    Bucket: env.aws_bucket_name
+    Bucket: env.aws_bucket_name,
 });
 
 
@@ -45,7 +45,10 @@ const multerS3Config = multerS3({
 
 
 //Middleware
-const upload = multer({storage: multerS3Config, fileFilter: fileFilter});
+const upload = multer({
+    storage: multerS3Config,
+     fileFilter: fileFilter
+});
 
 module.exports = upload;
 
