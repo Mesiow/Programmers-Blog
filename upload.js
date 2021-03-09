@@ -9,7 +9,7 @@ const s3Config = new aws.S3({
     Bucket: env.aws_bucket_name,
 });
 
-https://programmers-blog-assets.s3.amazonaws.com/help.PNG
+
 const fileFilter = (req, file, cb) => {
     if(file.mimetype == 'image/jpeg' || file.mimetype == 
     'image/png'){
