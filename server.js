@@ -6,11 +6,13 @@ const methodOverride = require("method-override");
 const passport = require("passport");
 const flash = require("express-flash");
 const session = require("express-session");
-const aws = require("aws-sdk");
+
 
 
 const env = require("./env_setup");
 
+
+//TODO: Be able to reference aws assets/images on heroku
 
 
 mongoose.set('useCreateIndex', true);

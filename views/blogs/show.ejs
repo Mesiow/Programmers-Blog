@@ -8,9 +8,9 @@
         <div class="content"><%=blog.title%></div>
       </h2>
       <% if(blog.filename !== '') {%>
-          <img id="blog-img" class="ui rounded image" src="/<%=blog.filename%>">
+          <img id="blog-img" class="ui rounded image" src="https://programmers-blog-assets.s3.amazonaws.com/<%=blog.filename%>">
       <%}else{%>
-        <img id="blog-img" class="ui rounded image" src="/<%=blog.filenameCopy%>">
+          <img id="blog-img" class="ui rounded image" src="https://programmers-blog-assets.s3.amazonaws.com/<%=blog.filenameCopy%>">
       <%}%>
 
     

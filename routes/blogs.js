@@ -110,5 +110,4 @@ function saveBlogAndRedirect(path) {
     }
 }
 
-
 module.exports = router;
