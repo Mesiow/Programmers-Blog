@@ -81,10 +81,11 @@ function saveBlogAndRedirect(path) {
             let filename = "";
             let mimetype = "";
             if(req.files){
-                filename = req.files[0].filename;
+                filename = req.files[0].originalname;
                 mimetype = req.files[0].mimetype;
             }
-            console.log(req.files);
+            console.log("Files: ", req.files[0].originalname);
+            console.log("File copy: ", req.body.filenameCopy);
         
            let author = {
                id: req.user.id,
